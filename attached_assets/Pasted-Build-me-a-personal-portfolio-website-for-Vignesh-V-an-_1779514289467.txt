@@ -1,0 +1,227 @@
+Build me a personal portfolio website for Vignesh V, an AI Business Analyst 
+based in Bengaluru, India. This is a single-page portfolio built with 
+HTML, CSS, and vanilla JavaScript (no frameworks needed).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DESIGN STYLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Reference: Clean editorial white portfolio (like Framer/Awwwards minimal style)
+- Background: #F7F6F2 (warm off-white)
+- Primary text: #0B0B0B
+- Muted text: #6B6B6B
+- Accent: #F5A623 (amber gold — use sparingly)
+- Cards/panels: #FFFFFF with 1px border #DDDDD8
+- Black sections: #0B0B0B
+
+Fonts (import from Google Fonts):
+- Display/headings: "Syne" (weights 700, 800)
+- Body: "Figtree" (weights 400, 500, 600)
+
+Aesthetic rules:
+- Large bold headings (clamp 52px–88px) with tight letter-spacing -0.03em
+- Generous whitespace, clean borders
+- Subtle grain texture overlay on body (CSS SVG filter)
+- Smooth scroll, scroll-triggered reveal animations (IntersectionObserver)
+- Hover: cards lift with translateY(-4px) + box-shadow
+- NO purple gradients, NO generic AI look, NO Inter or Roboto fonts
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTIONS TO BUILD (in order)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. FIXED NAVIGATION BAR
+   - Logo left: "it's me — VV." (Syne bold)
+   - Center: pill-shaped nav with links: My Work | Experience | Services | Contact me
+     (active link = black background, white text, rounded pill)
+   - Right: email "VIGVISHNU987@GMAIL.COM" as small text link
+   - Transparent until scrolled → then frosted glass (backdrop-filter blur)
+
+2. HERO SECTION (full viewport height, 2-column grid)
+   LEFT COLUMN:
+   - Waving hand emoji + "Hello! I'm" in large Syne
+   - Giant name: "Vignesh V." (Syne 800, 80px+, tight tracking)
+   - Black pill badge: "● AI Business Analyst" (amber dot + white text on black)
+   - Bio paragraph: "Hi! I'm Vignesh — an AI-era Business Analyst, 
+     data storyteller, and founder. I turn complex business problems into 
+     clear decisions using data, dashboards, and AI strategy. 
+     Also building SkillYou, an AI-powered career platform."
+   - 3 checklist bullets (black circle ✓ icon):
+     • Translate business problems into data-driven solutions
+     • Build AI strategies executives can act on today
+     • Stakeholder alignment, BRDs, and sprint-ready specs
+   - 2 CTA buttons: "Let's Talk →" (black filled, pill) + "Download CV ↓" (ghost, pill)
+
+   RIGHT COLUMN:
+   - Colorful gaussian blur blob (conic-gradient, pink/yellow/blue, blurred 40px)
+     sitting behind a photo card
+   - Photo card: 320×400px white rounded-16px card with drop shadow
+     → Inside: A centered SVG avatar silhouette placeholder with label 
+       "Replace with your professional photo"
+     → Add an HTML comment: <!-- Replace with: <img src="photo.jpg"> -->
+   - "Hello 👋" black pill bubble floating bottom-right, CSS float animation
+   - Two floating white skill badges (drop shadow):
+     Top-left: "📊 Power BI Expert"
+     Bottom-left: "🤖 AI Strategy"
+     Both have subtle up-down float animation (CSS keyframes)
+
+   Below hero: Dark strip (#0B0B0B) with:
+   LinkedIn | GitHub | +91 93449 41328 | VIGVISHNU987@GMAIL.COM
+
+3. SCROLLING TICKER BAR (black background)
+   Infinite left-scrolling marquee, white text, Syne font, uppercase:
+   DATA ANALYSIS ◆ AI STRATEGY ◆ POWER BI DASHBOARDS ◆ SQL & PYTHON ◆ 
+   PROMPT ENGINEERING ◆ BUSINESS ANALYSIS ◆ RAG ARCHITECTURE ◆ 
+   STAKEHOLDER MANAGEMENT ◆ BRD / FRD WRITING ◆ STARTUP FOUNDER ◆
+   (duplicate the track for seamless loop)
+
+4. SERVICES SECTION (white background)
+   Section label: "— My Services" (small caps, gray)
+   Heading: "WHAT I'M OFFERING" (two lines, huge Syne 800)
+   Right of heading: short desc + "ALL SERVICES" black button
+
+   3 service cards (1/3 grid, bordered, hover lift + bottom border slide-in):
+   Card 1: 📊 "Data & Business Analysis"
+     SQL, Python, Power BI dashboards, KPI frameworks, and data storytelling 
+     that drives real decisions — not just reports.
+   Card 2: 🤖 "AI Strategy & Consulting"
+     Identify where AI can cut costs, speed up processes, or unlock revenue. 
+     Map workflows to AI opportunities and build the roadmap.
+   Card 3: 🗂️ "Product & Requirements Management"
+     Stakeholder interviews, BRD/FRD docs, process mapping, and Agile sprint 
+     facilitation. Bridge business and engineering teams.
+   Each card has: icon in bordered square + title + desc + "Read More →" link
+
+5. EXPERIENCE SECTION
+   2-column layout: sidebar left (1fr), list right (2fr)
+
+   Sidebar: 
+   - Label "— Career"
+   - Heading "EXPERIENCE"
+   - Small desc: "3+ years across supply chain analytics, BI, consulting, and AI product development."
+
+   Right: clean table-style list, each row = full-width border-top/bottom:
+   Row 1: "Supply Chain Analyst Executive" | Flipkart — Myntra, Bengaluru | "Sep 2025–Present" badge + "● Current" black pill
+   Row 2: "Data & Business Analyst" | Spire Technologies Pvt Ltd, Bengaluru | "Job Duration — 1 Year"
+   Row 3: "Business Analyst" | Frankmax Tech Pvt Ltd, Nagercoil | "Job Duration — 1 Year"
+   Row 4: "Founder — SkillYou AI Platform" | Self-Founded Startup | "2023–Present"
+   Row 5: "MBA — Business Analytics & Ops" | Anna University, Chennai | "2022–2024"
+
+   Rows animate in with translateY + opacity on scroll (staggered delay)
+
+6. CASE STUDIES SECTION (white background)
+   Header: "— Portfolio" label + "CASE STUDY" heading left, desc right
+   
+   CSS Grid layout (2 cols):
+   - Left column spans 2 rows (featured card, taller)
+   - Right column: 2 stacked cards
+   Then below: 2 more cards side by side
+
+   Featured Card (col span 2 rows):
+   Visual area: dark gradient (#0B0B0B to #2A2A2A), rocket emoji, amber "AI PRODUCT" badge
+   Title: "SkillYou — AI-Powered Career Platform for the Disrupted Job Market"
+   Desc: "End-to-end AI job platform combining job discovery, resume intelligence, 
+   and career pivot guidance. 5-layer intelligent job agent powered by Claude API, 
+   Supabase & PostgreSQL. Freemium + B2B data licensing revenue model."
+   Link: "See Details ↗"
+
+   Card 2: Light beige gradient, 📈 emoji, "DATA ANALYSIS" badge
+   Title: "E-Commerce Retention & Inventory Scorecard"
+   Desc: "Python + SQL RFM segmentation delivering churn reduction and stock optimization."
+
+   Card 3: Light blue gradient, 🏥 emoji, "MACHINE LEARNING" badge
+   Title: "Heart Attack Prediction — 87% Accuracy ML Model"
+   Desc: "Binary classification using Random Forest in Python (Sklearn). 87% accuracy."
+
+   Card 4: Warm beige, 📦 emoji, "BI DASHBOARD" badge
+   Title: "Myntra Supply Chain KPI Dashboard"
+   Desc: "Real-time Power BI tracking shipment KPIs and asset utilization for Flipkart."
+
+   Card 5: Light green, 🎯 emoji, "STRATEGY" badge
+   Title: "BSC Client Dashboards — 5+ Accounts"
+   Desc: "Balanced Scorecard dashboards enabling real-time ROI and conversion tracking."
+
+   All cards: hover → lift + shadow; reveal animation on scroll
+
+7. AI ERA STATS STRIP (full black section)
+   2-column layout:
+   LEFT:
+   - Label "— My Edge" (gray)
+   - Heading "Built for the AI Era" (white, Syne 800)
+   - Desc: "I bridge the gap between what AI can do and what your business needs. 
+     From prompt engineering to RAG architecture, I bring technical depth to strategic roles."
+   - Skill pill tags (white border, hover = amber border + text):
+     Prompt Engineering | RAG Architecture | Fine-tuning LLMs | Vibe Coding | 
+     Claude API | AI Product Strategy | ML (Sklearn) | Supabase
+
+   RIGHT: 4 dark stat rows (#0F0F0F background, #1E1E1E border):
+   "Years of Experience" → "3+"
+   "Client Accounts Served" → "5+"
+   "ML Model Accuracy" → "87%"
+   "Open to Remote Global Roles" → "100%"
+   (stat numbers in Syne 800, large, white; "+" and "%" in amber)
+
+8. CONTACT SECTION
+   2-column layout:
+   LEFT:
+   - Label, Heading: "Let's Work Together"
+   - Bio: "Open to fully remote roles as Business Analyst, AI Analyst, 
+     AI Consultant, or Product Analyst — anywhere globally. USD/EUR preferred."
+   - 4 contact cards (white bordered, hover = border-black + slide right):
+     ✉ Email: VIGVISHNU987@GMAIL.COM
+     in LinkedIn: linkedin.com/in/vignesh-v-051a001b3
+     ⌥ GitHub: VigneshsparrowEsh
+     ☎ Phone: +91 93449 41328
+
+   RIGHT: Contact form (white card, 1px border):
+   Fields: First Name + Last Name (2-col grid) | Company/Role | Email | Message (textarea)
+   Submit button: full-width black
+
+9. FOOTER (black)
+   Left: "VV." logo (Syne 800, white)
+   Center: "© 2025 Vignesh V — AI Business Analyst · Bengaluru, India"
+   Right: "↑ Back to Top" link
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+JAVASCRIPT BEHAVIOR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- IntersectionObserver: fade + slide-up reveal for all sections, 
+  cards, and experience rows (opacity 0 → 1, translateY 28px → 0)
+- Staggered delays on grid children (0.1s per item)
+- Navbar: add .scrolled class (frosted glass + border-bottom) after 60px scroll
+- Active nav link: highlight pill on current section
+- Smooth scroll for all anchor links
+- Ticker: pure CSS animation (no JS needed)
+- Wave emoji: CSS rotation keyframe animation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TECHNICAL REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Single file: index.html (embed all CSS in <style>, all JS in <script>)
+- Google Fonts: import Syne + Figtree at top of <style>
+- Fully responsive: mobile breakpoint at 768px
+  → Stack hero to single column on mobile
+  → Nav links hidden on mobile (show only logo + email)
+  → Services: 1 column on mobile
+  → Cases grid: 1 column on mobile
+- No external JS libraries, no jQuery, no frameworks
+- CSS custom properties (variables) for all colors
+- Subtle grain texture: SVG data URI as body::before overlay, opacity 0.4
+- All sections max-width: 1200px, centered with auto margins
+- Photo area: show placeholder SVG with instruction comment in HTML
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PERSONAL INFO (use exactly)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Name: Vignesh V
+Email: VIGVISHNU987@GMAIL.COM
+Phone: +91 93449 41328
+LinkedIn: https://linkedin.com/in/vignesh-v-051a001b3
+GitHub: https://github.com/VigneshsparrowEsh
+Location: Koramangala, Bengaluru, India
+Role: AI Business Analyst | Data Analyst | Founder
+Current employer: Flipkart (Myntra | Central Control Tower)
+Startup: SkillYou (AI-powered career platform)
+Education: MBA Business Analytics — Anna University (2022–2024)
+Key skills: Python, SQL, Power BI, Tableau, Advanced Excel, 
+            SWOT, PESTLE, BRD, FRD, Agile, Prompt Engineering, 
+            RAG, Fine-tuning, Claude API, Supabase
