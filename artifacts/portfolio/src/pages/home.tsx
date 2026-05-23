@@ -249,27 +249,64 @@ export default function Home() {
 
             <div className="flex flex-col">
               {[
-                { role: "Supply Chain Analyst Executive", company: "Flipkart — Myntra | Central Control Tower, Bengaluru", date: "Sep 2025–Present", current: true },
-                { role: "Data & Business Analyst", company: "Spire Technologies Pvt Ltd, Bengaluru", date: "Job Duration — 1 Year" },
-                { role: "Business Analyst", company: "Frankmax Tech Pvt Ltd, Nagercoil", date: "Job Duration — 1 Year" },
-                { role: "Founder — SkillYou AI Platform", company: "Self-Founded Startup", date: "2023–Present" },
-                { role: "MBA — Business Analytics & Ops", company: "Anna University, Chennai", date: "2022–2024" }
+                {
+                  role: "Supply Chain Analyst Executive",
+                  company: "Flipkart — Myntra | Central Control Tower, Bengaluru",
+                  date: "Sep 2025 – Present",
+                  current: true,
+                  bullets: [
+                    "Monitored end-to-end shipment planning and flow across Myntra's Central Control Tower, tracking pan-India operations of 5–8 lakh consignments per day from fulfillment centers to last-mile delivery across all zones",
+                    "Contributed to achieving the BAU target of 3.7% asset utilization efficiency by tracking deviations, running root cause analyses, and coordinating with logistics partners",
+                    "Built Power BI dashboards to track shipment KPIs, delivery SLAs, and fulfilment metrics — enabling faster, data-backed decisions for planning and logistics teams",
+                    "Automated daily supply chain reports using Python (Pandas) and Advanced Excel (Power Query, Pivot Tables), reducing manual reporting effort and improving data turnaround time"
+                  ]
+                },
+                {
+                  role: "Data & Business Analyst",
+                  company: "Spire Technologies Pvt Ltd, Bengaluru",
+                  date: "Sep 2024 – Aug 2025",
+                  bullets: [
+                    "Analyzed large operational and campaign datasets using SQL and Python across 5+ client accounts, improving system data accuracy from 75% to 85% through data validation, cleansing, and pipeline optimization",
+                    "Designed and delivered 3+ Power BI dashboards aligned to Balanced Scorecard (BSC) metrics, enabling department heads to monitor ROI, process efficiency, and customer engagement in real time",
+                    "Conducted SWOT and PESTLE analyses to assess client business positioning and market dynamics, delivering strategic recommendations for 8+ senior stakeholders"
+                  ]
+                },
+                {
+                  role: "Business Analyst",
+                  company: "Frankmax Tech Pvt Ltd, Nagercoil, Kanyakumari",
+                  date: "Aug 2020 – Sep 2022",
+                  bullets: [
+                    "Gathered and documented business requirements through stakeholder interviews using structured BRD and FRD frameworks, supporting process improvement initiatives across 3+ internal teams",
+                    "Analyzed operational and procurement data using SQL and Advanced Excel to identify workflow bottlenecks, contributing to a business performance improvement from 60% to 80% within 6 months",
+                    "Built and maintained reporting dashboards using Power BI, Advanced Excel, and SQL to track vendor performance, procurement cost trends, and project milestones for leadership review"
+                  ]
+                }
               ].map((job, i) => (
-                <div key={i} className="group flex flex-col md:flex-row md:items-center justify-between py-8 border-t border-border last:border-b transition-colors hover:bg-white reveal-hidden px-4 -mx-4" style={{ transitionDelay: `${i * 100}ms` }}>
-                  <div className="mb-4 md:mb-0">
-                    <h3 className="font-display font-bold text-xl md:text-2xl mb-2">{job.role}</h3>
-                    <p className="text-muted">{job.company}</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="px-4 py-1.5 border border-border rounded-full text-sm font-medium bg-white whitespace-nowrap">
-                      {job.date}
+                <div key={i} className="group py-8 border-t border-border last:border-b reveal-hidden" style={{ transitionDelay: `${i * 100}ms` }}>
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
+                    <div>
+                      <h3 className="font-display font-bold text-xl md:text-2xl mb-1">{job.role}</h3>
+                      <p className="text-muted">{job.company}</p>
                     </div>
-                    {job.current && (
-                      <div className="px-3 py-1.5 bg-black text-white rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#F5A623]"></span> Current
+                    <div className="flex items-center gap-3 flex-shrink-0">
+                      <div className="px-4 py-1.5 border border-border text-sm font-medium bg-white whitespace-nowrap">
+                        {job.date}
                       </div>
-                    )}
+                      {job.current && (
+                        <div className="px-3 py-1.5 bg-black text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#F5A623]"></span> Current
+                        </div>
+                      )}
+                    </div>
                   </div>
+                  <ul className="flex flex-col gap-2 mt-3">
+                    {job.bullets.map((b, j) => (
+                      <li key={j} className="flex gap-3 text-sm text-muted leading-relaxed">
+                        <span className="mt-1.5 w-1 h-1 rounded-full bg-[#6B6B6B] flex-shrink-0"></span>
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>

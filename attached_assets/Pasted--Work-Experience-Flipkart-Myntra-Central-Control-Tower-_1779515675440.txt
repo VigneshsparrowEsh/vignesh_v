@@ -1,0 +1,46 @@
+## Work Experience
+
+### Flipkart (Myntra — Central Control Tower) -- Bengaluru, India
+**Supply Chain Analyst Executive**
+September 2025 – Present
+
+- Monitored end-to-end shipment planning and flow across Myntra's Central 
+  Control Tower, tracking pan-India operations of 5–8 lakh consignments per 
+  day (CPD) from fulfillment centers to last-mile delivery across all zones
+- Contributed to achieving the BAU target of 3.7% asset utilization 
+  efficiency by tracking deviations, running root cause analyses, and 
+  coordinating with logistics partners
+- Built Power BI dashboards to track shipment KPIs, delivery SLAs, and 
+  fulfilment metrics — enabling faster, data-backed decisions for planning 
+  and logistics teams
+- Automated daily supply chain reports using Python (Pandas) and Advanced 
+  Excel (Power Query, Pivot Tables), reducing manual reporting effort and 
+  improving data turnaround time for ops reviews
+
+### Spire Technologies Pvt Ltd -- Bengaluru, India
+**Data & Business Analyst**
+September 2024 – August 2025
+
+- Analyzed large operational and campaign datasets using SQL and Python 
+  across 5+ client accounts, improving system data accuracy from 75% to 85% 
+  through data validation, cleansing, and pipeline optimization
+- Designed and delivered 3+ Power BI dashboards aligned to Balanced 
+  Scorecard (BSC) metrics, enabling department heads to monitor ROI, 
+  process efficiency, and customer engagement in real time
+- Conducted SWOT and PESTLE analyses to assess client business positioning 
+  and market dynamics, delivering strategic recommendations for 8+ senior 
+  stakeholders that shaped campaign and digital strategy decisions
+
+### Frankmax Tech Pvt Ltd -- Nagercoil, Kanyakumari, India
+**Business Analyst**
+August 2020 – September 2022
+
+- Gathered and documented business requirements through stakeholder 
+  interviews using structured BRD and FRD frameworks, supporting process 
+  improvement initiatives across 3+ internal teams
+- Analyzed operational and procurement data using SQL and Advanced Excel 
+  to identify workflow bottlenecks, contributing to a business performance 
+  improvement from 60% to 80% within 6 months in a fast-paced environment
+- Built and maintained reporting dashboards using Power BI, Advanced Excel, 
+  and SQL to track vendor performance, procurement cost trends, and project 
+  milestones for leadership review
