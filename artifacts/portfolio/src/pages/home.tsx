@@ -314,6 +314,121 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Education Section */}
+      <section id="education" className="py-24 bg-white border-y border-border">
+        <div className="container px-6 md:px-12 mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-16 md:gap-24">
+            <div className="reveal-hidden">
+              <p className="uppercase tracking-widest text-sm font-semibold text-muted mb-4">— Academic</p>
+              <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight mb-6">EDUCATION</h2>
+              <p className="text-lg text-muted">Formal degrees and applied technical training across business, engineering, and AI.</p>
+            </div>
+            <div className="flex flex-col">
+              {[
+                { degree: "MBA, Business Analytics & Operations Management", institution: "Anna University", location: "Chennai, India", year: "2022 – 2024", icon: "🎓" },
+                { degree: "B.E., Mechanical Engineering", institution: "RCET, Anna University", location: "Chennai, India", year: "2016 – 2020", icon: "⚙️" },
+                { degree: "Diploma, Electronics & Communication Engineering (Python & ML)", institution: "Netwoksz System", location: "Trivandrum, India", year: "2021", icon: "💡" },
+              ].map((edu, i) => (
+                <div key={i} className="flex items-start gap-6 py-8 border-t border-border last:border-b reveal-hidden" style={{ transitionDelay: `${i * 100}ms` }}>
+                  <div className="w-12 h-12 flex-shrink-0 border border-border bg-[#F7F6F2] flex items-center justify-center text-2xl">{edu.icon}</div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-display font-bold text-lg md:text-xl mb-1 leading-snug">{edu.degree}</h3>
+                    <p className="text-muted text-sm">{edu.institution} &mdash; {edu.location}</p>
+                  </div>
+                  <div className="flex-shrink-0 px-4 py-1.5 border border-border text-sm font-medium bg-[#F7F6F2] whitespace-nowrap">{edu.year}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-24 bg-[#F7F6F2]">
+        <div className="container px-6 md:px-12 mx-auto max-w-7xl">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16 reveal-hidden">
+            <div>
+              <p className="uppercase tracking-widest text-sm font-semibold text-muted mb-4">— Work</p>
+              <h2 className="font-display font-extrabold text-4xl md:text-5xl tracking-tight">PROFESSIONAL SKILLS<br />DEMONSTRATED</h2>
+            </div>
+            <p className="text-muted max-w-xs text-left md:text-right text-sm leading-relaxed">Live products, ML models, and analytics projects that show real depth.</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            {/* SkillYou — with screenshot */}
+            <div className="bg-white border border-border overflow-hidden group reveal-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              <div className="overflow-hidden h-52 relative">
+                <img src="/skillyou.png" alt="SkillYou platform screenshot" className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute top-3 left-3">
+                  <span className="bg-black text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5">Live Product</span>
+                </div>
+              </div>
+              <div className="p-8">
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <h3 className="font-display font-bold text-2xl">SkillYou</h3>
+                  <a href="https://skillyou.in" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-wider text-muted border border-border px-3 py-1.5 hover:border-black hover:text-black transition-colors whitespace-nowrap flex-shrink-0">skillyou.in ↗</a>
+                </div>
+                <p className="text-muted text-sm leading-relaxed">AI-powered career platform delivering personalised job recommendations, career path analysis, skill gap insights, and interview preparation. Built end-to-end and live.</p>
+              </div>
+            </div>
+
+            {/* CryptoNice — with screenshot */}
+            <div className="bg-white border border-border overflow-hidden group reveal-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" style={{ transitionDelay: "0.1s" }}>
+              <div className="overflow-hidden h-52 relative">
+                <img src="/cryptonice.png" alt="CryptoNice platform screenshot" className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute top-3 left-3">
+                  <span className="bg-black text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5">Live Product</span>
+                </div>
+              </div>
+              <div className="p-8">
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <h3 className="font-display font-bold text-2xl">CryptoNice</h3>
+                  <a href="https://cryptonice.lovable.app" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-wider text-muted border border-border px-3 py-1.5 hover:border-black hover:text-black transition-colors whitespace-nowrap flex-shrink-0">cryptonice.lovable.app ↗</a>
+                </div>
+                <p className="text-muted text-sm leading-relaxed">Web3 portfolio and strategy platform enabling users to connect crypto wallets, track real-time portfolio performance, and simulate crypto investment strategies.</p>
+              </div>
+            </div>
+
+            {/* Heart Attack Prediction */}
+            <div className="bg-white border border-border overflow-hidden group reveal-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" style={{ transitionDelay: "0.2s" }}>
+              <div className="h-52 flex items-center justify-center relative" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)" }}>
+                <span className="text-6xl">🤖</span>
+                <div className="absolute top-3 left-3">
+                  <span className="bg-[#F5A623] text-black text-xs font-bold uppercase tracking-widest px-3 py-1.5">ML Model</span>
+                </div>
+              </div>
+              <div className="p-8">
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <h3 className="font-display font-bold text-2xl">Heart Attack Prediction</h3>
+                  <a href="https://github.com/VigneshsparrowEsh/Heart_attack_pred" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-wider text-muted border border-border px-3 py-1.5 hover:border-black hover:text-black transition-colors whitespace-nowrap flex-shrink-0">GitHub ↗</a>
+                </div>
+                <p className="text-muted text-sm leading-relaxed mb-4">Binary classification model predicting heart attack likelihood using Logistic Regression, Decision Tree, and Random Forest in Python (Sklearn). Achieved 87% accuracy after feature engineering and hyperparameter tuning.</p>
+                <div className="inline-flex items-center gap-2 bg-[#F7F6F2] border border-border px-3 py-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#F5A623]"></span>
+                  <span className="text-xs font-bold uppercase tracking-wider">87% Accuracy</span>
+                </div>
+              </div>
+            </div>
+
+            {/* E-Commerce Retention */}
+            <div className="bg-white border border-border overflow-hidden group reveal-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl" style={{ transitionDelay: "0.3s" }}>
+              <div className="h-52 flex items-center justify-center relative" style={{ background: "linear-gradient(135deg, #F7F1E8 0%, #EDE4D4 100%)" }}>
+                <span className="text-6xl">📊</span>
+                <div className="absolute top-3 left-3">
+                  <span className="bg-black text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5">MBA Capstone 2024</span>
+                </div>
+              </div>
+              <div className="p-8">
+                <h3 className="font-display font-bold text-2xl mb-3">E-Commerce Customer Retention Analysis</h3>
+                <p className="text-muted text-sm leading-relaxed">Built a customer churn prediction model using RFM analysis and Python, segmenting users into loyalty tiers. Developed a Power BI dashboard tracking conversion rate, AOV, repeat purchase rate, and cart abandonment for data-driven retention decisions.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* Case Studies Section */}
       <section id="portfolio" className="py-24 bg-white border-y border-border">
         <div className="container px-6 md:px-12 mx-auto max-w-7xl">
