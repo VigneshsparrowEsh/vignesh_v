@@ -58,7 +58,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex items-center justify-between glass-nav ${scrolled ? "scrolled" : ""}`}>
         <div className="font-display font-extrabold text-xl tracking-tight cursor-pointer" onClick={() => scrollTo("home")}>
-          it's me — VV.
+          it's me — AI Strategist.
         </div>
         
         <div className="hidden md:flex items-center bg-white border border-border rounded-full p-1 shadow-sm">
@@ -93,7 +93,7 @@ export default function Home() {
                 <span className="font-display font-semibold text-2xl md:text-3xl text-muted">
                   <span className="animate-wave mr-2">👋</span> Hello! I'm
                 </span>
-                <h1 className="font-display font-extrabold text-[clamp(52px,7vw,88px)] leading-[1.05] tracking-[-0.03em] mt-2 mb-6">
+                <h1 className="font-display font-extrabold text-[clamp(40px,5.5vw,72px)] leading-[1.05] tracking-[-0.03em] mt-2 mb-6 whitespace-nowrap">
                   Vignesh V.
                 </h1>
                 <div className="inline-flex items-center gap-2 bg-black text-white px-4 py-1.5 rounded-full text-sm font-medium mb-6">
@@ -200,42 +200,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-
-      {/* Services Section */}
-      <section id="services" className="py-24 bg-white border-y border-border">
-        <div className="container px-6 md:px-12 mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16 reveal-hidden">
-            <div>
-              <p className="uppercase tracking-widest text-sm font-semibold text-muted mb-4">— My Services</p>
-              <h2 className="font-display font-extrabold text-4xl md:text-6xl tracking-tight max-w-lg">WHAT I'M<br/>OFFERING</h2>
-            </div>
-            <div className="text-left md:text-right max-w-sm">
-              <p className="text-muted mb-6">Partnering with teams to deliver clear insights, optimized processes, and AI-forward strategies.</p>
-              <Button variant="outline" className="rounded-full border-black text-black hover:bg-black hover:text-white transition-colors">ALL SERVICES</Button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { icon: "📊", title: "Data & Business Analysis", desc: "SQL queries, Python analysis, Power BI dashboards, KPI frameworks, and data storytelling that drives real decisions — not just reports." },
-              { icon: "🤖", title: "AI Strategy & Consulting", desc: "Identify where AI can cut costs, speed up processes, or unlock revenue. Map workflows to AI opportunities and build the roadmap." },
-              { icon: "🗂️", title: "Product & Requirements", desc: "Stakeholder interviews, BRD/FRD docs, process mapping, and Agile sprint facilitation. Bridge business and engineering teams." }
-            ].map((service, i) => (
-              <div key={i} className="group bg-white border border-border p-8 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden reveal-hidden" style={{ transitionDelay: `${i * 100}ms` }}>
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#F5A623] transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                <div className="w-14 h-14 border border-border rounded-xl flex items-center justify-center text-2xl mb-8 bg-background">
-                  {service.icon}
-                </div>
-                <h3 className="font-display font-bold text-xl mb-4">{service.title}</h3>
-                <p className="text-muted leading-relaxed mb-8">{service.desc}</p>
-                <a href="#" className="inline-flex items-center text-sm font-bold uppercase tracking-wider group-hover:text-[#F5A623] transition-colors">
-                  Read More <ArrowRight className="w-4 h-4 ml-2" />
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Experience Section */}
       <section id="experience" className="py-24 bg-background">
@@ -524,6 +488,42 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-24 bg-white border-y border-border">
+        <div className="container px-6 md:px-12 mx-auto max-w-7xl">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16 reveal-hidden">
+            <div>
+              <p className="uppercase tracking-widest text-sm font-semibold text-muted mb-4">— My Services</p>
+              <h2 className="font-display font-extrabold text-4xl md:text-6xl tracking-tight max-w-lg">WHAT I'M<br/>OFFERING</h2>
+            </div>
+            <div className="text-left md:text-right max-w-sm">
+              <p className="text-muted mb-6">Partnering with teams to deliver clear insights, optimized processes, and AI-forward strategies.</p>
+              <Button variant="outline" className="rounded-full border-black text-black hover:bg-black hover:text-white transition-colors">ALL SERVICES</Button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { icon: "📊", title: "Data & Business Analysis", desc: "SQL queries, Python analysis, Power BI dashboards, KPI frameworks, and data storytelling that drives real decisions — not just reports." },
+              { icon: "🤖", title: "AI Strategy & Consulting", desc: "Identify where AI can cut costs, speed up processes, or unlock revenue. Map workflows to AI opportunities and build the roadmap." },
+              { icon: "🗂️", title: "Product & Requirements", desc: "Stakeholder interviews, BRD/FRD docs, process mapping, and Agile sprint facilitation. Bridge business and engineering teams." }
+            ].map((service, i) => (
+              <div key={i} className="group bg-white border border-border p-8 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden reveal-hidden" style={{ transitionDelay: `${i * 100}ms` }}>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#F5A623] transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <div className="w-14 h-14 border border-border rounded-xl flex items-center justify-center text-2xl mb-8 bg-background">
+                  {service.icon}
+                </div>
+                <h3 className="font-display font-bold text-xl mb-4">{service.title}</h3>
+                <p className="text-muted leading-relaxed mb-8">{service.desc}</p>
+                <a href="#" className="inline-flex items-center text-sm font-bold uppercase tracking-wider group-hover:text-[#F5A623] transition-colors">
+                  Read More <ArrowRight className="w-4 h-4 ml-2" />
+                </a>
+              </div>
+            ))}
           </div>
         </div>
       </section>
