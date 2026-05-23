@@ -132,9 +132,11 @@ export default function Home() {
                 <Button size="lg" className="rounded-full bg-black text-white hover:bg-black/90 px-8 h-12" onClick={() => scrollTo("contact")}>
                   Let's Talk <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-                <Button size="lg" variant="outline" className="rounded-full border-black text-black hover:bg-black/5 px-8 h-12">
-                  Download CV <ArrowDown className="w-4 h-4 ml-2" />
-                </Button>
+                <a href="/vignesh_v_resume.pdf" download="Vignesh_V_Resume.pdf">
+                  <Button size="lg" variant="outline" className="rounded-full border-black text-black hover:bg-black/5 px-8 h-12">
+                    Download CV <ArrowDown className="w-4 h-4 ml-2" />
+                  </Button>
+                </a>
               </motion.div>
             </div>
 
