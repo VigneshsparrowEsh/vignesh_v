@@ -163,7 +163,7 @@ export default function Home() {
                     src="/vignesh.png"
                     alt="Vignesh V"
                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-                    style={{ filter: "grayscale(100%) contrast(1.08) brightness(0.85)" }}
+                    style={{ filter: "none" }}
                   />
                 </div>
               </div>
