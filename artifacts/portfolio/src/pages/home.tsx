@@ -11,6 +11,101 @@ const SURFACE = "#111111";
 const BORDER = "rgba(255,255,255,0.08)";
 const MUTED = "#6B6B6B";
 
+function ContactForm() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [subject, setSubject] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!firstName.trim() || !email.trim() || !message.trim()) {
+      setErrorMsg("Name, email, and message are required.");
+      setStatus("error");
+      return;
+    }
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: `${firstName.trim()} ${lastName.trim()}`.trim(),
+          email: email.trim(),
+          subject: subject.trim() || "Portfolio Contact",
+          message: message.trim(),
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error ?? "Something went wrong");
+      }
+      setStatus("success");
+      setFirstName(""); setLastName(""); setSubject(""); setEmail(""); setMessage("");
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : "Failed to send message.");
+      setStatus("error");
+    }
+  };
+
+  const inputClass = "h-12 rounded-none border-0 border-b text-white placeholder:text-zinc-700 bg-transparent focus-visible:ring-0";
+
+  return (
+    <div className="reveal-hidden" style={{ transitionDelay: "0.2s" }}>
+      <div className="border p-8 md:p-10" style={{ borderColor: BORDER, background: SURFACE }}>
+        {status === "success" ? (
+          <div className="flex flex-col items-center justify-center py-12 gap-4 text-center">
+            <div className="w-14 h-14 rounded-full flex items-center justify-center text-2xl" style={{ background: `${AMBER}22`, border: `1px solid ${AMBER}55` }}>✓</div>
+            <h3 className="font-display text-2xl font-medium text-white">Message Sent</h3>
+            <p className="text-sm" style={{ color: MUTED }}>Thanks for reaching out — I'll get back to you soon.</p>
+            <button onClick={() => setStatus("idle")} className="text-xs uppercase tracking-widest mt-2 hover:underline" style={{ color: AMBER }}>Send another</button>
+          </div>
+        ) : (
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-2">
+                <label className="text-xs uppercase tracking-widest font-medium" style={{ color: MUTED }}>First Name *</label>
+                <Input value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="John" className={inputClass} style={{ borderColor: BORDER }} />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs uppercase tracking-widest font-medium" style={{ color: MUTED }}>Last Name</label>
+                <Input value={lastName} onChange={e => setLastName(e.target.value)} placeholder="Doe" className={inputClass} style={{ borderColor: BORDER }} />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs uppercase tracking-widest font-medium" style={{ color: MUTED }}>Company / Role</label>
+              <Input value={subject} onChange={e => setSubject(e.target.value)} placeholder="Tech Corp" className={inputClass} style={{ borderColor: BORDER }} />
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs uppercase tracking-widest font-medium" style={{ color: MUTED }}>Email Address *</label>
+              <Input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="john@example.com" className={inputClass} style={{ borderColor: BORDER }} />
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs uppercase tracking-widest font-medium" style={{ color: MUTED }}>Message *</label>
+              <Textarea value={message} onChange={e => setMessage(e.target.value)} placeholder="How can we work together?" className="rounded-none border-0 border-b text-white placeholder:text-zinc-700 bg-transparent focus-visible:ring-0 min-h-[130px] resize-none" style={{ borderColor: BORDER }} />
+            </div>
+            {status === "error" && (
+              <p className="text-xs" style={{ color: "#ef4444" }}>{errorMsg}</p>
+            )}
+            <Button
+              type="submit"
+              disabled={status === "sending"}
+              className="w-full text-sm font-bold uppercase tracking-widest rounded-none text-black transition-all mt-4 disabled:opacity-60"
+              style={{ background: AMBER, height: "3.25rem" }}
+            >
+              {status === "sending" ? "Sending…" : "Send Message"}
+            </Button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -613,37 +708,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="reveal-hidden" style={{ transitionDelay: "0.2s" }}>
-              <div className="border p-8 md:p-10" style={{ borderColor: BORDER, background: SURFACE }}>
-                <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest font-medium" style={{ color: MUTED }}>First Name</label>
-                      <Input placeholder="John" className="h-12 rounded-none border-0 border-b text-white placeholder:text-zinc-700 bg-transparent focus-visible:ring-0" style={{ borderColor: BORDER }} />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest font-medium" style={{ color: MUTED }}>Last Name</label>
-                      <Input placeholder="Doe" className="h-12 rounded-none border-0 border-b text-white placeholder:text-zinc-700 bg-transparent focus-visible:ring-0" style={{ borderColor: BORDER }} />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest font-medium" style={{ color: MUTED }}>Company / Role</label>
-                    <Input placeholder="Tech Corp" className="h-12 rounded-none border-0 border-b text-white placeholder:text-zinc-700 bg-transparent focus-visible:ring-0" style={{ borderColor: BORDER }} />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest font-medium" style={{ color: MUTED }}>Email Address</label>
-                    <Input type="email" placeholder="john@example.com" className="h-12 rounded-none border-0 border-b text-white placeholder:text-zinc-700 bg-transparent focus-visible:ring-0" style={{ borderColor: BORDER }} />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest font-medium" style={{ color: MUTED }}>Message</label>
-                    <Textarea placeholder="How can we work together?" className="rounded-none border-0 border-b text-white placeholder:text-zinc-700 bg-transparent focus-visible:ring-0 min-h-[130px] resize-none" style={{ borderColor: BORDER }} />
-                  </div>
-                  <Button className="w-full h-13 text-sm font-bold uppercase tracking-widest rounded-none text-black transition-all mt-4" style={{ background: AMBER, height: "3.25rem" }}>
-                    Send Message
-                  </Button>
-                </form>
-              </div>
-            </div>
+            <ContactForm />
           </div>
         </div>
       </section>
