@@ -414,6 +414,25 @@ export default function Home() {
                 <p className="text-sm leading-relaxed" style={{ color: MUTED }}>Customer churn prediction using RFM analysis and Python, segmenting users into loyalty tiers. Power BI dashboard tracking conversion rate, AOV, and cart abandonment.</p>
               </div>
             </div>
+
+            {/* proof_of_Build */}
+            <div className="group reveal-hidden overflow-hidden" style={{ background: BG, transitionDelay: "0.4s" }}>
+              <div className="overflow-hidden h-52 relative">
+                <img src="/proofofbuild.png" alt="proof_of_Build platform" className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+                <div className="absolute top-3 left-3">
+                  <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5" style={{ background: AMBER, color: "#000" }}>Live Product</span>
+                </div>
+              </div>
+              <div className="p-8">
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <h3 className="font-display font-medium text-2xl text-white">proof_of_Build</h3>
+                  <a href="https://proofbuild.in/" target="_blank" rel="noopener noreferrer" className="text-xs font-medium uppercase tracking-wider px-3 py-1.5 border transition-colors whitespace-nowrap flex-shrink-0" style={{ borderColor: BORDER, color: MUTED }}>
+                    proofbuild.in ↗
+                  </a>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: MUTED }}>A platform that connects builders and startup founders to solve real-world business problems. Founders post real challenges; builders ship working prototypes — with escrow, contracts, and conversion to long-term roles built in.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
