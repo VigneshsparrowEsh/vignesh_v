@@ -334,8 +334,9 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Right — 3D Canvas */}
-            <div className="lg:col-span-6 order-1 lg:order-2 relative" id="hero-canvas-wrapper">
+            {/* Right — Portrait */}
+            <div className="lg:col-span-6 order-1 lg:order-2 relative">
+              {/* Floating badges */}
               <div className="absolute top-8 -left-2 z-10 animate-float1 hidden lg:block">
                 <span className="flex items-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-full shadow-2xl"
                   style={{ background: SURFACE, border: `1px solid ${BORDER}`, color: "#DDD" }}>
@@ -348,14 +349,22 @@ export default function Home() {
                   🤖 AI Strategy
                 </span>
               </div>
-              <div className="absolute top-1/2 right-0 -translate-y-1/2 z-10 animate-floatBubble hidden lg:block" style={{ right: "-1rem" }}>
+              <div className="absolute top-1/2 -translate-y-1/2 z-10 animate-floatBubble hidden lg:block" style={{ right: "-1rem" }}>
                 <span className="flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-full shadow-2xl"
                   style={{ background: `${AMBER}20`, border: `1px solid ${AMBER}50`, color: AMBER }}>
                   Hello 👋
                 </span>
               </div>
-              <div className="animate-glow-pulse rounded-xl overflow-hidden">
-                <HeroCanvas />
+              {/* Photo */}
+              <div className="relative w-full max-w-sm mx-auto group">
+                <div className="absolute inset-0 translate-x-4 translate-y-4 group-hover:translate-x-6 group-hover:translate-y-6 transition-transform duration-500"
+                  style={{ background: `${AMBER}18` }} />
+                <div className="absolute inset-0 border z-10 pointer-events-none" style={{ borderColor: "rgba(255,255,255,0.1)" }} />
+                <div className="aspect-[4/5] overflow-hidden relative z-0">
+                  <img src="/vignesh.png" alt="Vignesh V"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+                    style={{ filter: "none" }} />
+                </div>
               </div>
             </div>
 
@@ -710,7 +719,7 @@ export default function Home() {
       {/* ── AI Era Strip ── */}
       <section className="py-24">
         <div className="container px-6 md:px-12 mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="reveal-hidden">
               <p className="text-xs uppercase tracking-widest font-medium mb-4" style={{ color: AMBER }}>— My Edge</p>
               <h2 className="font-display font-medium text-4xl md:text-5xl text-white mb-6 gsap-heading">Built for the AI Era</h2>
@@ -727,22 +736,14 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="space-y-3">
-              {[
-                { label: "Years of Experience",         value: "3",   suffix: "+" },
-                { label: "Client Accounts Served",      value: "5",   suffix: "+" },
-                { label: "ML Model Accuracy",           value: "87",  suffix: "%" },
-                { label: "Open to Remote Global Roles", value: "100", suffix: "%" },
-              ].map((stat, i) => (
-                <div key={i} className="flex justify-between items-center p-6 reveal-hidden"
-                  style={{ background: SURFACE, border: `1px solid ${BORDER}`, transitionDelay: `${i * 80}ms` }}>
-                  <span className="text-base font-medium" style={{ color: "#AAA" }}>{stat.label}</span>
-                  <div className="font-display font-medium text-4xl text-white gsap-stat"
-                    data-target={stat.value} data-suffix={stat.suffix}>
-                    {stat.value}<span style={{ color: AMBER }}>{stat.suffix}</span>
-                  </div>
-                </div>
-              ))}
+            {/* 3D Canvas */}
+            <div className="reveal-hidden flex flex-col items-center gap-4" style={{ transitionDelay: "0.15s" }}>
+              <div className="w-full animate-glow-pulse rounded-xl overflow-hidden" style={{ maxWidth: 480 }}>
+                <HeroCanvas />
+              </div>
+              <p className="text-xs uppercase tracking-widest text-center" style={{ color: MUTED }}>
+                Interactive · Move your cursor over the shape
+              </p>
             </div>
           </div>
         </div>
