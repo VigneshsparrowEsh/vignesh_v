@@ -88,20 +88,31 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    cursor: none;
+  }
+
   body {
     @apply font-sans antialiased bg-background text-foreground relative;
     background-color: #0A0A0A;
     color: #E4E4E4;
+    cursor: none;
   }
 
+  /* Grain overlay */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 999;
-    opacity: 0.25;
+    opacity: 0.35;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  a, button {
+    cursor: none;
   }
 }
 
@@ -113,42 +124,147 @@
   font-family: 'Inter', sans-serif;
 }
 
+/* ─── Marquee ─── */
 @keyframes marquee {
-  0% { transform: translateX(0); }
+  0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }
 
 .animate-marquee {
-  animation: marquee 35s linear infinite;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 22s linear infinite;
+  will-change: transform;
+}
+.animate-marquee:hover,
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
 }
 
+/* ─── Scroll reveals ─── */
 .reveal-hidden {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .reveal-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* ─── Nav glass ─── */
 .glass-nav {
   background: transparent;
   transition: all 0.3s ease;
 }
-
 .glass-nav.scrolled {
   background: rgba(10, 10, 10, 0.88);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 
+/* ─── Ping ─── */
 @keyframes ping-slow {
   0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.6); opacity: 0; }
+  50%       { transform: scale(1.6); opacity: 0; }
 }
-
 .animate-ping-slow {
   animation: ping-slow 2s ease-in-out infinite;
+}
+
+/* ─── Floating badges ─── */
+@keyframes float1 {
+  0%   { transform: translateY(0px) rotate(-2deg); }
+  50%  { transform: translateY(-12px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(-2deg); }
+}
+@keyframes float2 {
+  0%   { transform: translateY(0px) rotate(2deg); }
+  50%  { transform: translateY(-16px) rotate(-1deg); }
+  100% { transform: translateY(0px) rotate(2deg); }
+}
+@keyframes floatBubble {
+  0%   { transform: translateY(0) rotate(-3deg); }
+  33%  { transform: translateY(-10px) rotate(2deg); }
+  66%  { transform: translateY(-5px) rotate(-1deg); }
+  100% { transform: translateY(0) rotate(-3deg); }
+}
+.animate-float1    { animation: float1 4s ease-in-out infinite; will-change: transform; }
+.animate-float2    { animation: float2 5s ease-in-out infinite 1s; will-change: transform; }
+.animate-floatBubble { animation: floatBubble 6s ease-in-out infinite; will-change: transform; }
+
+/* ─── Canvas glow pulse ─── */
+@keyframes glowPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(245,166,35,0.35); }
+  50%  { box-shadow: 0 0 40px 20px rgba(245,166,35,0); }
+  100% { box-shadow: 0 0 0 0 rgba(245,166,35,0); }
+}
+.animate-glow-pulse {
+  animation: glowPulse 3s ease-in-out infinite;
+  will-change: box-shadow;
+}
+
+/* ─── Service card hover bottom bar ─── */
+.service-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #F5A623;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.service-card:hover::after {
+  transform: scaleX(1);
+}
+.service-card {
+  transition: transform 0.3s cubic-bezier(0.25,1,0.5,1), box-shadow 0.3s ease;
+  will-change: transform;
+}
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+/* ─── Case card hover ─── */
+.case-card {
+  transition: transform 0.3s cubic-bezier(0.25,1,0.5,1), box-shadow 0.3s ease;
+  will-change: transform;
+}
+.case-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+/* ─── Contact card hover ─── */
+.contact-card {
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  will-change: transform;
+}
+.contact-card:hover {
+  transform: translateX(8px);
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Mobile ticker speed ─── */
+@media (max-width: 768px) {
+  .animate-marquee         { animation-duration: 38s; }
+  .animate-marquee-reverse { animation-duration: 30s; }
 }

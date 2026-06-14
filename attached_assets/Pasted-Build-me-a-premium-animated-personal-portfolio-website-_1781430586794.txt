@@ -1,0 +1,456 @@
+Build me a premium animated personal portfolio website for Vignesh V, 
+an AI Business Analyst. This is a single HTML file with embedded CSS 
+and JavaScript. The animation quality must match MetaMask.io — 
+professional, smooth, and GPU-accelerated.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXTERNAL LIBRARIES TO LOAD (via CDN in <head>)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DESIGN TOKENS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+:root {
+  --bg: #F7F6F2;
+  --white: #FFFFFF;
+  --black: #0B0B0B;
+  --mid: #6B6B6B;
+  --border: #DDDDD8;
+  --amber: #F5A623;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Figtree', sans-serif;
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ANIMATION 1 — 3D CURSOR-TRACKING HERO ELEMENT
+(MetaMask Fox equivalent — the signature feature)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+In the hero section RIGHT COLUMN, replace the static photo placeholder 
+with a full Three.js canvas that renders a floating 3D wireframe brain/
+data-sphere that tracks the user's cursor in real time.
+
+Build it exactly like this:
+
+STEP 1 — Scene setup:
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.z = 4;
+  const renderer = new THREE.WebGLRenderer({ 
+    canvas: document.getElementById('hero-canvas'),
+    alpha: true,        // transparent background
+    antialias: true 
+  });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(canvasEl.offsetWidth, canvasEl.offsetHeight);
+
+STEP 2 — Create the 3D object (a low-poly icosahedron = "AI Brain"):
+  const geometry = new THREE.IcosahedronGeometry(1.3, 1);
+  
+  // SOLID inner mesh (semi-transparent amber/gold fill):
+  const solidMat = new THREE.MeshPhongMaterial({
+    color: 0xF5A623,
+    transparent: true,
+    opacity: 0.08,
+    side: THREE.DoubleSide
+  });
+  const solidMesh = new THREE.Mesh(geometry, solidMat);
+  scene.add(solidMesh);
+  
+  // WIREFRAME outer mesh (dark lines on top):
+  const wireMat = new THREE.MeshBasicMaterial({ 
+    color: 0x0B0B0B, 
+    wireframe: true,
+    transparent: true,
+    opacity: 0.7
+  });
+  const wireMesh = new THREE.Mesh(geometry, wireMat);
+  scene.add(wireMesh);
+
+STEP 3 — Lighting:
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+  scene.add(ambientLight);
+  const pointLight = new THREE.PointLight(0xF5A623, 1.5, 10);
+  pointLight.position.set(2, 2, 2);
+  scene.add(pointLight);
+
+STEP 4 — Cursor tracking rotation (the signature MetaMask effect):
+  let targetRotX = 0, targetRotY = 0;
+  let currentRotX = 0, currentRotY = 0;
+  
+  document.addEventListener('mousemove', (e) => {
+    // Map mouse to -1 to +1 range
+    targetRotY = ((e.clientX / window.innerWidth) - 0.5) * 2.0;
+    targetRotX = ((e.clientY / window.innerHeight) - 0.5) * -1.5;
+  });
+
+STEP 5 — Animation loop with lerp (smooth lag = premium feel):
+  function animate() {
+    requestAnimationFrame(animate);
+    
+    // Lerp for smooth follow (0.05 = gentle lag, feels alive)
+    currentRotX += (targetRotX - currentRotX) * 0.05;
+    currentRotY += (targetRotY - currentRotY) * 0.05;
+    
+    solidMesh.rotation.x = currentRotX;
+    solidMesh.rotation.y = currentRotY + Date.now() * 0.0003;
+    wireMesh.rotation.x = currentRotX;
+    wireMesh.rotation.y = currentRotY + Date.now() * 0.0003;
+    
+    renderer.render(scene, camera);
+  }
+  animate();
+
+STEP 6 — Canvas HTML (in hero RIGHT column):
+  <canvas id="hero-canvas" style="width:100%;height:480px;display:block;"></canvas>
+
+STEP 7 — Orbit particles around the 3D object:
+  Add 80 small spheres (radius 0.025) randomly placed in a shell 
+  between r=1.8 and r=2.5 around the origin.
+  Each particle slowly orbits:
+    particle.position.x = Math.cos(time * speed + offset) * radius;
+    particle.position.z = Math.sin(time * speed + offset) * radius;
+  Use color 0xF5A623 with opacity 0.6.
+  This creates the "data cloud" effect around the brain.
+
+STEP 8 — Responsive resize handler:
+  window.addEventListener('resize', () => {
+    renderer.setSize(canvasEl.offsetWidth, canvasEl.offsetHeight);
+    camera.aspect = canvasEl.offsetWidth / canvasEl.offsetHeight;
+    camera.updateProjectionMatrix();
+  });
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ANIMATION 2 — GSAP SCROLL-DRIVEN REVEALS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Register GSAP ScrollTrigger plugin:
+  gsap.registerPlugin(ScrollTrigger);
+
+Apply these ScrollTrigger animations:
+
+A) HERO TEXT — staggered fade + slide up on page load (no scroll):
+  gsap.from('.hero-greeting', { opacity:0, y:40, duration:0.8, delay:0.2, ease:'power3.out' });
+  gsap.from('.hero-name',     { opacity:0, y:60, duration:0.9, delay:0.35, ease:'power3.out' });
+  gsap.from('.hero-role-tag', { opacity:0, y:30, duration:0.7, delay:0.5,  ease:'power3.out' });
+  gsap.from('.hero-bio',      { opacity:0, y:30, duration:0.7, delay:0.65, ease:'power3.out' });
+  gsap.from('.hero-checks li',{ opacity:0, x:-30, duration:0.6, delay:0.8, stagger:0.12, ease:'power2.out' });
+  gsap.from('.hero-actions',  { opacity:0, y:20, duration:0.6, delay:1.1,  ease:'power2.out' });
+
+B) SECTION HEADINGS — slide from left on scroll:
+  Apply to every .section-heading:
+  gsap.from(el, {
+    scrollTrigger: { trigger: el, start: 'top 80%', toggleActions: 'play none none none' },
+    opacity: 0, x: -60, duration: 1, ease: 'power3.out'
+  });
+
+C) SERVICE CARDS — staggered cascade on scroll:
+  gsap.from('.service-card', {
+    scrollTrigger: { trigger: '.services-grid', start: 'top 75%' },
+    opacity: 0, y: 80, duration: 0.8, stagger: 0.15, ease: 'power3.out'
+  });
+
+D) EXPERIENCE ROWS — slide in from right, staggered:
+  gsap.from('.exp-item', {
+    scrollTrigger: { trigger: '.exp-list', start: 'top 80%' },
+    opacity: 0, x: 50, duration: 0.7, stagger: 0.1, ease: 'power2.out'
+  });
+
+E) CASE STUDY CARDS — scale up from 0.9:
+  gsap.from('.case-card', {
+    scrollTrigger: { trigger: '.cases-grid', start: 'top 75%' },
+    opacity: 0, scale: 0.92, y: 40, duration: 0.8, stagger: 0.12, ease: 'back.out(1.4)'
+  });
+
+F) STATS — count-up animation on scroll:
+  When the .ai-strip-right section enters viewport, trigger a number 
+  count-up for each stat value:
+    "3+" counts from 0 to 3
+    "5+" counts from 0 to 5
+    "87%" counts from 0 to 87
+    "100%" counts from 0 to 100
+  Use gsap.to with a custom counter object:
+    gsap.to(counter, { 
+      val: targetNum, 
+      duration: 2, 
+      ease: 'power2.out',
+      onUpdate: () => el.textContent = Math.ceil(counter.val) + suffix
+    });
+
+G) AI SKILLS PILLS — wave in staggered:
+  gsap.from('.ai-skill', {
+    scrollTrigger: { trigger: '.ai-skills', start: 'top 80%' },
+    opacity: 0, y: 20, scale: 0.8, duration: 0.5, stagger: 0.06, ease: 'back.out(2)'
+  });
+
+H) CONTACT CARDS — slide from left:
+  gsap.from('.contact-card', {
+    scrollTrigger: { trigger: '.contact-cards', start: 'top 80%' },
+    opacity: 0, x: -40, duration: 0.6, stagger: 0.1, ease: 'power2.out'
+  });
+
+I) PARALLAX on hero background grid:
+  gsap.to('.hero-bg-grid', {
+    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true },
+    y: -80, ease: 'none'
+  });
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ANIMATION 3 — MICRO-INTERACTIONS & HOVER STATES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+A) PRIMARY BUTTONS (.btn-black):
+  CSS only:
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), 
+                background 0.2s ease, box-shadow 0.25s ease;
+  :hover:
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  :active:
+    transform: translateY(0) scale(0.98);
+
+B) GHOST BUTTONS (.btn-ghost):
+  :hover:
+    border-color: var(--black);
+    background: var(--black);
+    color: white;
+    transform: translateY(-3px);
+  Transition: all 0.25s ease;
+
+C) SERVICE CARDS (.service-card):
+  :hover:
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.1);
+    border-color: #BBBBB6;
+  Bottom border slide-in:
+    ::after pseudo-element, scaleX 0→1 from left on hover
+  "Read More →": gap animates 6px → 12px on card hover (CSS sibling)
+
+D) CASE STUDY CARDS (.case-card):
+  :hover:
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+  Tag badge (.case-tag):
+    :hover on card → background shifts from amber to black, color to white
+  Smooth: transition: all 0.3s cubic-bezier(0.25,1,0.5,1);
+
+E) NAV LINKS:
+  Each pill link:
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  :hover (not active): background: rgba(0,0,0,0.06); slight scale 1.02
+
+F) CONTACT CARDS (.contact-card):
+  :hover: 
+    transform: translateX(8px);
+    border-left: 3px solid var(--black);
+    background: #FAFAF8;
+  transition: all 0.2s ease;
+
+G) 3D CANVAS — on mobile (no mouse), auto-rotate:
+  If 'ontouchstart' in window → 
+    auto-rotate: solidMesh.rotation.y += 0.008 per frame
+    No cursor tracking on mobile
+
+H) CURSOR: Custom CSS cursor for desktop:
+  cursor: none on body
+  Add a div#cursor (12px amber circle) and div#cursor-ring (40px border circle)
+  Track with mousemove, ring follows with 80ms setTimeout for lag
+  On hovering links/buttons: cursor grows to 20px, ring to 60px
+
+I) HERO CANVAS — pulse glow on idle:
+  If mouse hasn't moved for 3 seconds:
+    Animate a glowing amber halo around the canvas:
+    box-shadow: 0 0 0 0 rgba(245,166,35,0.4) → 0 0 40px 20px rgba(245,166,35,0)
+    CSS keyframe: glowPulse 2s ease-in-out infinite
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ANIMATION 4 — MARQUEE / INFINITE TICKER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Build 2 ticker sections:
+
+TICKER 1 (black, below hero):
+  Content: DATA ANALYSIS ◆ AI STRATEGY ◆ POWER BI ◆ SQL & PYTHON ◆ 
+           PROMPT ENGINEERING ◆ BUSINESS ANALYSIS ◆ RAG ARCHITECTURE ◆ 
+           STAKEHOLDER MANAGEMENT ◆ BRD / FRD WRITING ◆ STARTUP FOUNDER ◆
+  Direction: left (standard)
+  Speed: 25s linear infinite
+  Font: Syne 700, 12px, white, letter-spacing 0.18em, uppercase
+
+TICKER 2 (amber/gold background, before contact section):
+  Content: OPEN TO REMOTE ✦ USD/EUR COMPENSATION ✦ FULL-TIME OR CONTRACT ✦ 
+           WORLDWIDE ELIGIBLE ✦ BENGALURU INDIA ✦ AI-ERA ANALYST ✦ 
+           AVAILABLE NOW ✦ OPEN TO REMOTE ✦
+  Direction: RIGHT (reverse direction, use animation-direction: reverse)
+  Speed: 20s
+  Font: Syne 800, 13px, black on amber background
+
+Both tickers:
+  - Duplicate content inside track for seamless loop
+  - Pause on hover: .ticker-track:hover { animation-play-state: paused; }
+  - Use will-change: transform for GPU compositing
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXTRA ANIMATION — FLOATING BADGE PHYSICS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+The two skill badges in the hero (📊 Power BI Expert, 🤖 AI Strategy):
+  Each floats independently with different phase offsets:
+  
+  Badge 1 (@keyframes float1):
+    0%   { transform: translateY(0px) rotate(-2deg); }
+    50%  { transform: translateY(-12px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(-2deg); }
+  Duration: 4s ease-in-out infinite
+
+  Badge 2 (@keyframes float2):
+    0%   { transform: translateY(0px) rotate(2deg); }
+    50%  { transform: translateY(-16px) rotate(-1deg); }
+    100% { transform: translateY(0px) rotate(2deg); }
+  Duration: 5s ease-in-out infinite, delay: 1s
+
+  "Hello 👋" bubble (@keyframes floatBubble):
+    0%   { transform: translateY(0) rotate(-3deg); }
+    33%  { transform: translateY(-10px) rotate(2deg); }
+    66%  { transform: translateY(-5px) rotate(-1deg); }
+    100% { transform: translateY(0) rotate(-3deg); }
+  Duration: 6s ease-in-out infinite
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXTRA ANIMATION — SMOOTH PAGE SCROLL FEEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Add CSS scroll smoothing:
+  html { scroll-behavior: smooth; }
+
+Add a scroll progress bar at top of page:
+  Fixed 3px tall bar at very top, width goes from 0% to 100% as user scrolls.
+  Color: linear-gradient(90deg, var(--amber), var(--black))
+  Update with:
+    window.addEventListener('scroll', () => {
+      const pct = (scrollY / (documentHeight - windowHeight)) * 100;
+      progressBar.style.width = pct + '%';
+    });
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PAGE SECTIONS & CONTENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. FIXED NAV:
+   Logo: "it's me — VV." | Center pill nav: My Work, Experience, Services, Contact 
+   | Right: VIGVISHNU987@GMAIL.COM
+   Frosted glass on scroll (backdrop-filter: blur(16px))
+
+2. HERO (2 column):
+   LEFT:
+   - "👋 Hello! I'm" greeting (Syne 600, 28px)
+   - "Vignesh V." (Syne 800, 80px+, letter-spacing -0.03em)
+   - Black pill badge: "● AI Business Analyst" (amber dot)
+   - Bio: "Hi! I'm Vignesh — an AI-era Business Analyst, data storyteller, 
+     and founder. I turn complex business problems into clear decisions 
+     using data, dashboards, and AI strategy. Also building SkillYou, 
+     an AI-powered career platform."
+   - 3 checklist items (black circle ✓):
+     • Translate business problems into data-driven solutions
+     • Build AI strategies executives can act on today
+     • Stakeholder alignment, BRDs, and sprint-ready specs
+   - Buttons: "Let's Talk →" (black pill) + "Download CV ↓" (ghost pill)
+
+   RIGHT: #hero-canvas Three.js canvas (full height, transparent bg)
+
+   Below hero: dark strip with LinkedIn | GitHub | Phone | Email
+
+3. TICKER 1 (black background)
+
+4. SERVICES SECTION (white bg):
+   Heading: "WHAT I'M OFFERING"
+   3 cards:
+   - 📊 Data & Business Analysis
+     SQL, Python, Power BI, KPI frameworks and data storytelling.
+   - 🤖 AI Strategy & Consulting
+     Map workflows to AI opportunities, build integration roadmaps.
+   - 🗂️ Product & Requirements Management
+     BRD/FRD docs, stakeholder interviews, Agile sprint facilitation.
+
+5. EXPERIENCE (2-col, sidebar + list):
+   Label: "— Career" | Heading: "EXPERIENCE"
+   Rows (bordered list):
+   - Supply Chain Analyst Executive | Flipkart – Myntra CCT | Sep 2025–Present [● CURRENT pill]
+   - Data & Business Analyst | Spire Technologies | 1 Year
+   - Business Analyst | Frankmax Tech | 1 Year
+   - Founder — SkillYou AI Platform | Self-Founded | 2023–Present
+   - MBA – Business Analytics | Anna University | 2022–2024
+
+6. CASE STUDIES (white bg, grid):
+   Heading: "CASE STUDY"
+   5 cards (featured spans 2 rows left col, 2 stacked right, then 2 bottom):
+   - 🚀 SkillYou AI Platform [FEATURED, AI PRODUCT tag]
+     5-layer AI job agent, Claude API, Supabase, B2B revenue model.
+   - 📈 E-Commerce Retention Scorecard [DATA ANALYSIS]
+     RFM segmentation in Python + SQL.
+   - 🏥 Heart Attack Prediction – 87% Accuracy [MACHINE LEARNING]
+     Random Forest in Sklearn.
+   - 📦 Myntra Supply Chain KPI Dashboard [BI DASHBOARD]
+     Real-time Power BI, Flipkart CCT.
+   - 🎯 BSC Client Dashboards – 5+ Accounts [STRATEGY]
+     Balanced Scorecard, BRD/FRD.
+
+7. AI ERA STRIP (full black):
+   Left: heading "Built for the AI Era"
+   Skills pills: Prompt Engineering, RAG Architecture, Fine-tuning LLMs, 
+                 Vibe Coding, Claude API, AI Product Strategy, ML (Sklearn), Supabase
+   Right: 4 stat rows with count-up:
+   - Years of Experience → 3+
+   - Client Accounts → 5+
+   - ML Accuracy → 87%
+   - Remote Ready → 100%
+
+8. TICKER 2 (amber background, reverse direction)
+
+9. CONTACT (2-col):
+   Heading: "Let's Work Together"
+   Bio: "Open to fully remote roles as BA, AI Analyst, AI Consultant globally. USD/EUR preferred."
+   Contact cards: Email | LinkedIn | GitHub | Phone
+   Right: Contact form (Name row, Company, Email, Message, Submit black btn)
+
+10. FOOTER (black):
+    Left: "VV." | Center: copyright | Right: ↑ Back to Top
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PERSONAL INFO (use exactly)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Name: Vignesh V
+Email: VIGVISHNU987@GMAIL.COM
+Phone: +91 93449 41328
+LinkedIn: https://linkedin.com/in/vignesh-v-051a001b3
+GitHub: https://github.com/VigneshsparrowEsh
+Location: Bengaluru, India
+Role: AI Business Analyst | Data Analyst | Startup Founder
+Employer: Flipkart (Myntra | Central Control Tower)
+Startup: SkillYou (AI-powered career platform, skillyou.in)
+Education: MBA Business Analytics — Anna University (2022–2024)
+Skills: Python, SQL, Power BI, Tableau, Excel, BRD, FRD, 
+        Agile, Prompt Engineering, RAG, Claude API, Supabase
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TECHNICAL REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Single file: index.html (all CSS in <style>, all JS in <script>)
+- CSS custom properties for all colors
+- will-change: transform on all animated elements
+- GPU-accelerated: use transform and opacity only (no top/left animation)
+- Mobile breakpoint 768px:
+    Hero: single column, canvas below text, 320px tall
+    Nav: logo + email only (hide pill links)
+    3D canvas: auto-rotate instead of cursor-track (touch detection)
+    Cards: single column
+    Tickers: slower (35s) on mobile
+- Scroll progress bar: fixed 3px at very top of viewport
+- Custom cursor: amber dot + ring (desktop only, hidden on touch)
+- Grain overlay: SVG noise filter as body::before, opacity 0.35
+- All GSAP ScrollTriggers: markers: false (no debug markers in prod)
+- Performance: requestAnimationFrame for Three.js, passive scroll listeners
+- Accessibility: prefers-reduced-motion media query:
+    @media (prefers-reduced-motion: reduce) { 
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      /* Keep Three.js rotation but remove lerp lag */
+    }
