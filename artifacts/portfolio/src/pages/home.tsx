@@ -563,103 +563,129 @@ export default function Home() {
             <p className="text-sm leading-relaxed max-w-xs text-right" style={{ color: MUTED }}>Live products, ML models, and analytics projects that show real depth.</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px" style={{ background: BORDER }}>
-            {/* SkillYou */}
-            <div className="group reveal-hidden overflow-hidden" style={{ background: BG }}>
-              <div className="overflow-hidden h-52 relative">
-                <img src="/skillyou.png" alt="SkillYou" className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" style={{ filter: "grayscale(20%)" }} />
-                <div className="absolute top-3 left-3">
-                  <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5" style={{ background: AMBER, color: "#000" }}>Live Product</span>
-                </div>
+          {/* ── Bento Grid ── */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[300px]">
+
+            {/* ── SkillYou — left top, tall 2 rows ── */}
+            <div className="bento-card reveal-hidden md:row-span-2 flex flex-col p-7"
+              style={{ background: "#0E0A1E", border: "1px solid rgba(139,92,246,0.18)" }}>
+              <div className="flex items-center justify-between mb-5">
+                <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
+                  style={{ background: "rgba(139,92,246,0.18)", color: "#a78bfa" }}>AI Career Platform</span>
+                <a href="https://skillyou.in" target="_blank" rel="noreferrer"
+                  className="text-xs font-semibold px-3 py-1.5 rounded-full transition-colors"
+                  style={{ background: "rgba(139,92,246,0.12)", color: "#a78bfa" }}>skillyou.in ↗</a>
               </div>
-              <div className="p-8">
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <h3 className="font-display font-medium text-2xl text-white">SkillYou</h3>
-                  <a href="https://skillyou.in" target="_blank" rel="noopener noreferrer"
-                    className="text-xs font-medium uppercase tracking-wider px-3 py-1.5 border transition-colors whitespace-nowrap flex-shrink-0"
-                    style={{ borderColor: BORDER, color: MUTED }}>skillyou.in ↗</a>
+              <h3 className="font-display font-semibold text-3xl text-white mb-2 leading-tight">SkillYou</h3>
+              <p className="text-sm leading-relaxed mb-6" style={{ color: "#9980c8" }}>AI-powered career platform — personalised job recs, skill-gap analysis &amp; interview prep. Built end-to-end and live.</p>
+              {/* floating screenshot */}
+              <div className="flex-1 relative overflow-hidden rounded-2xl" style={{ background: "rgba(139,92,246,0.08)" }}>
+                <div className="absolute inset-0 flex items-end justify-center pb-0">
+                  <img src="/skillyou.png" alt="SkillYou screenshot"
+                    className="w-[90%] object-cover object-top rounded-t-2xl shadow-2xl bento-float"
+                    style={{ animationDelay: "0s", maxHeight: "80%" }} />
                 </div>
-                <p className="text-sm leading-relaxed" style={{ color: MUTED }}>AI-powered career platform delivering personalised job recommendations, career path analysis, skill gap insights, and interview preparation. Built end-to-end and live.</p>
+                {/* orbit blobs */}
+                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full bento-orbit"
+                  style={{ background: "#7c3aed", opacity: 0.6 }} />
+                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bento-orbit-r"
+                  style={{ background: AMBER, opacity: 0.7 }} />
               </div>
             </div>
 
-            {/* CryptoNice */}
-            <div className="group reveal-hidden overflow-hidden" style={{ background: BG, transitionDelay: "0.1s" }}>
-              <div className="overflow-hidden h-52 relative">
-                <img src="/cryptonice.png" alt="CryptoNice" className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" style={{ filter: "grayscale(20%)" }} />
-                <div className="absolute top-3 left-3">
-                  <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5" style={{ background: AMBER, color: "#000" }}>Live Product</span>
-                </div>
+            {/* ── proof_of_Build — center top ── */}
+            <div className="bento-card reveal-hidden flex flex-col p-7"
+              style={{ background: "#061614", border: "1px solid rgba(20,184,166,0.18)", transitionDelay: "0.08s" }}>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
+                  style={{ background: "rgba(20,184,166,0.15)", color: "#2dd4bf" }}>Live Product</span>
+                <a href="https://proofbuild.in" target="_blank" rel="noreferrer"
+                  className="text-xs font-semibold px-3 py-1.5 rounded-full"
+                  style={{ background: "rgba(20,184,166,0.1)", color: "#2dd4bf" }}>proofbuild.in ↗</a>
               </div>
-              <div className="p-8">
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <h3 className="font-display font-medium text-2xl text-white">CryptoNice</h3>
-                  <a href="https://cryptonice.lovable.app" target="_blank" rel="noopener noreferrer"
-                    className="text-xs font-medium uppercase tracking-wider px-3 py-1.5 border transition-colors whitespace-nowrap flex-shrink-0"
-                    style={{ borderColor: BORDER, color: MUTED }}>cryptonice.lovable.app ↗</a>
-                </div>
-                <p className="text-sm leading-relaxed" style={{ color: MUTED }}>Web3 portfolio and strategy platform for connecting crypto wallets, tracking real-time performance, and simulating crypto investment strategies.</p>
-              </div>
-            </div>
-
-            {/* Heart Attack Prediction */}
-            <div className="group reveal-hidden overflow-hidden" style={{ background: BG, transitionDelay: "0.2s" }}>
-              <div className="h-52 flex items-center justify-center relative" style={{ background: "linear-gradient(135deg, #0f0f1a 0%, #12122a 100%)" }}>
-                <div className="text-center">
-                  <span className="font-display text-6xl font-light text-white opacity-20">87%</span>
-                  <p className="text-xs uppercase tracking-widest mt-2 font-medium" style={{ color: AMBER }}>Accuracy</p>
-                </div>
-                <div className="absolute top-3 left-3">
-                  <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 border" style={{ borderColor: `${AMBER}40`, color: AMBER }}>ML Model</span>
-                </div>
-              </div>
-              <div className="p-8">
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <h3 className="font-display font-medium text-2xl text-white">Heart Attack Prediction</h3>
-                  <a href="https://github.com/VigneshsparrowEsh/Heart_attack_pred" target="_blank" rel="noopener noreferrer"
-                    className="text-xs font-medium uppercase tracking-wider px-3 py-1.5 border transition-colors whitespace-nowrap flex-shrink-0"
-                    style={{ borderColor: BORDER, color: MUTED }}>GitHub ↗</a>
-                </div>
-                <p className="text-sm leading-relaxed" style={{ color: MUTED }}>Binary classification model predicting heart attack likelihood using Logistic Regression, Decision Tree, and Random Forest in Python (Sklearn). Achieved 87% accuracy.</p>
+              <h3 className="font-display font-semibold text-2xl text-white mb-2 leading-tight">proof_of_Build</h3>
+              <p className="text-xs leading-relaxed" style={{ color: "#5eead4", opacity: 0.75 }}>Founders post real challenges; builders ship prototypes.</p>
+              {/* floating image */}
+              <div className="flex-1 relative mt-4 overflow-hidden rounded-xl" style={{ background: "rgba(20,184,166,0.06)" }}>
+                <img src="/proofofbuild.png" alt="proof_of_Build"
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[88%] object-cover object-top rounded-t-xl shadow-xl bento-drift"
+                  style={{ animationDelay: "1s" }} />
               </div>
             </div>
 
-            {/* E-Commerce Retention */}
-            <div className="group reveal-hidden overflow-hidden" style={{ background: BG, transitionDelay: "0.3s" }}>
-              <div className="h-52 flex items-center justify-center relative" style={{ background: "linear-gradient(135deg, #111108 0%, #1a1a0f 100%)" }}>
-                <div className="text-center">
-                  <span className="font-display text-6xl font-light text-white opacity-20">RFM</span>
-                  <p className="text-xs uppercase tracking-widest mt-2 font-medium" style={{ color: AMBER }}>Analysis</p>
+            {/* ── Heart Attack — right top ── */}
+            <div className="bento-card reveal-hidden flex flex-col p-7"
+              style={{ background: "#130810", border: "1px solid rgba(244,63,94,0.18)", transitionDelay: "0.14s" }}>
+              <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full w-fit mb-4"
+                style={{ background: "rgba(244,63,94,0.14)", color: "#fb7185" }}>ML Model</span>
+              <h3 className="font-display font-semibold text-2xl text-white mb-1 leading-tight">Heart Attack<br />Prediction</h3>
+              <p className="text-xs mb-5" style={{ color: "#f43f5e88" }}>Python · Sklearn · Random Forest</p>
+              {/* animated accuracy meter */}
+              <div className="flex-1 flex flex-col justify-center gap-4">
+                <div className="flex items-end gap-2">
+                  <span className="font-display font-semibold text-6xl leading-none text-white bento-scale">87</span>
+                  <span className="text-2xl font-bold mb-2" style={{ color: "#fb7185" }}>%</span>
                 </div>
-                <div className="absolute top-3 left-3">
-                  <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 border" style={{ borderColor: `${AMBER}40`, color: AMBER }}>MBA Capstone 2024</span>
+                <div className="text-xs uppercase tracking-widest mb-3" style={{ color: "#fb718570" }}>Accuracy</div>
+                {/* bar chart viz */}
+                <div className="flex items-end gap-1.5 h-14">
+                  {[55,72,81,87,84,90,87].map((h, i) => (
+                    <div key={i} className="flex-1 rounded-sm"
+                      style={{ height: `${h}%`, background: i === 3 ? "#fb7185" : "rgba(244,63,94,0.25)", animationDelay: `${i*0.12}s` }} />
+                  ))}
                 </div>
-              </div>
-              <div className="p-8">
-                <h3 className="font-display font-medium text-2xl text-white mb-3">E-Commerce Customer Retention</h3>
-                <p className="text-sm leading-relaxed" style={{ color: MUTED }}>Customer churn prediction using RFM analysis and Python, segmenting users into loyalty tiers. Power BI dashboard tracking conversion rate, AOV, and cart abandonment.</p>
+                <a href="https://github.com/VigneshsparrowEsh/Heart_attack_pred" target="_blank" rel="noreferrer"
+                  className="text-xs font-semibold mt-2 w-fit" style={{ color: "#fb718599" }}>View on GitHub ↗</a>
               </div>
             </div>
 
-            {/* proof_of_Build */}
-            <div className="group reveal-hidden overflow-hidden" style={{ background: BG, transitionDelay: "0.4s" }}>
-              <div className="overflow-hidden h-52 relative">
-                <img src="/proofofbuild.png" alt="proof_of_Build platform" className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
-                <div className="absolute top-3 left-3">
-                  <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5" style={{ background: AMBER, color: "#000" }}>Live Product</span>
-                </div>
+            {/* ── CryptoNice — center bottom ── */}
+            <div className="bento-card reveal-hidden flex flex-col p-7"
+              style={{ background: "#0A0818", border: "1px solid rgba(99,102,241,0.18)", transitionDelay: "0.2s" }}>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
+                  style={{ background: "rgba(99,102,241,0.15)", color: "#818cf8" }}>Web3 Platform</span>
+                <a href="https://cryptonice.lovable.app" target="_blank" rel="noreferrer"
+                  className="text-xs font-semibold" style={{ color: "#818cf877" }}>↗</a>
               </div>
-              <div className="p-8">
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <h3 className="font-display font-medium text-2xl text-white">proof_of_Build</h3>
-                  <a href="https://proofbuild.in/" target="_blank" rel="noopener noreferrer"
-                    className="text-xs font-medium uppercase tracking-wider px-3 py-1.5 border transition-colors whitespace-nowrap flex-shrink-0"
-                    style={{ borderColor: BORDER, color: MUTED }}>proofbuild.in ↗</a>
-                </div>
-                <p className="text-sm leading-relaxed" style={{ color: MUTED }}>A platform that connects builders and startup founders to solve real-world business problems. Founders post real challenges; builders ship working prototypes — with escrow, contracts, and conversion to long-term roles built in.</p>
+              <h3 className="font-display font-semibold text-2xl text-white mb-1 leading-tight">CryptoNice</h3>
+              <p className="text-xs leading-relaxed mb-4" style={{ color: "#818cf875" }}>Connect wallets, track portfolio & simulate crypto strategies.</p>
+              <div className="flex-1 relative overflow-hidden rounded-xl" style={{ background: "rgba(99,102,241,0.06)" }}>
+                <img src="/cryptonice.png" alt="CryptoNice"
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] object-cover object-top rounded-t-xl shadow-xl bento-float"
+                  style={{ animationDelay: "2s" }} />
               </div>
             </div>
+
+            {/* ── E-Commerce — right bottom ── */}
+            <div className="bento-card reveal-hidden flex flex-col p-7"
+              style={{ background: "#0C0E06", border: "1px solid rgba(163,230,53,0.15)", transitionDelay: "0.26s" }}>
+              <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full w-fit mb-4"
+                style={{ background: "rgba(163,230,53,0.12)", color: "#a3e635" }}>MBA Capstone 2024</span>
+              <h3 className="font-display font-semibold text-2xl text-white mb-1 leading-tight">Customer<br />Retention</h3>
+              <p className="text-xs mb-5" style={{ color: "#a3e63560" }}>RFM Analysis · Power BI · Python</p>
+              {/* animated RFM segments */}
+              <div className="flex-1 flex flex-col justify-center gap-3">
+                {[
+                  { label: "Champions",     pct: 28, color: "#a3e635" },
+                  { label: "Loyal Customers", pct: 42, color: "#84cc16" },
+                  { label: "At Risk",       pct: 18, color: "#65a30d" },
+                  { label: "Lost",          pct: 12, color: "#3f6212" },
+                ].map((seg, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <span className="text-xs w-28 shrink-0" style={{ color: "#a3e63580" }}>{seg.label}</span>
+                    <div className="flex-1 h-2 rounded-full" style={{ background: "rgba(163,230,53,0.1)" }}>
+                      <div className="h-2 rounded-full bento-scale"
+                        style={{ width: `${seg.pct}%`, background: seg.color, animationDelay: `${i*0.3}s` }} />
+                    </div>
+                    <span className="text-xs w-8 text-right" style={{ color: seg.color }}>{seg.pct}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
+
         </div>
       </section>
 
