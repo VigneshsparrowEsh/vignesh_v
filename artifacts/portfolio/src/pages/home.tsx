@@ -141,7 +141,25 @@ export default function Home() {
     );
     document.querySelectorAll(".reveal-hidden").forEach((el) => obs.observe(el));
     document.querySelectorAll("section[id]").forEach((el) => obs.observe(el));
-    return () => obs.disconnect();
+
+    /* Skill bars — animate width when parent scrolls into view */
+    const barObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll<HTMLElement>(".skill-bar").forEach((bar) => {
+              const target = bar.getAttribute("data-target-width") ?? "0%";
+              bar.style.width = target;
+            });
+            barObs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    document.querySelectorAll(".skill-bar-item").forEach((el) => barObs.observe(el));
+
+    return () => { obs.disconnect(); barObs.disconnect(); };
   }, []);
 
   /* GSAP scroll animations */
@@ -220,6 +238,7 @@ export default function Home() {
   const navLinks = [
     { name: "Work",       id: "portfolio"  },
     { name: "Experience", id: "experience" },
+    { name: "Skills",     id: "skills"     },
     { name: "Services",   id: "services"   },
     { name: "Contact",    id: "contact"    },
   ];
@@ -512,6 +531,116 @@ export default function Home() {
                 </div>
               ))}
               <div style={{ borderTop: `1px solid ${BORDER}` }} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Skills ── */}
+      <section id="skills" className="py-24" style={{ background: SURFACE, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}>
+        <div className="container px-6 md:px-12 mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16">
+
+            {/* Left label */}
+            <div className="reveal-hidden">
+              <p className="text-xs uppercase tracking-widest font-medium mb-4" style={{ color: AMBER }}>— Expertise</p>
+              <h2 className="font-display font-medium text-4xl md:text-5xl text-white mb-6 gsap-heading">Skills &amp;<br />Toolbox</h2>
+              <p className="text-base leading-relaxed" style={{ color: MUTED }}>
+                Hands-on proficiency across data, analytics, and business strategy — built through 3+ years of real projects.
+              </p>
+            </div>
+
+            {/* Right — skill bars + chips */}
+            <div className="flex flex-col gap-10">
+
+              {/* Proficiency bars */}
+              <div className="flex flex-col gap-7 reveal-hidden">
+                {[
+                  {
+                    label: "Advanced Excel",
+                    tags: ["LOOKUPS", "INDEX-MATCH", "Power Query", "Pivot Tables & Charts"],
+                    pct: 95,
+                    color: AMBER,
+                  },
+                  {
+                    label: "Data Visualization",
+                    tags: ["Power BI", "Tableau", "Looker"],
+                    pct: 90,
+                    color: "#60a5fa",
+                  },
+                  {
+                    label: "Python",
+                    tags: ["Pandas", "NumPy", "Sklearn", "Matplotlib"],
+                    pct: 90,
+                    color: "#a78bfa",
+                  },
+                  {
+                    label: "SQL",
+                    tags: ["MySQL", "SQL Server", "BigQuery"],
+                    pct: 85,
+                    color: "#34d399",
+                  },
+                ].map((skill, i) => (
+                  <div key={i} className="skill-bar-item" style={{ transitionDelay: `${i * 80}ms` }}>
+                    {/* Top row */}
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <span className="text-base font-medium text-white">{skill.label}</span>
+                        {skill.tags.map((t) => (
+                          <span key={t} className="text-xs px-2 py-0.5 rounded-full border"
+                            style={{ borderColor: `${skill.color}30`, color: skill.color, background: `${skill.color}0d` }}>
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-sm font-semibold flex-shrink-0 ml-4" style={{ color: skill.color }}>{skill.pct}%</span>
+                    </div>
+                    {/* Bar track */}
+                    <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+                      <div
+                        className="skill-bar h-1.5 rounded-full"
+                        style={{
+                          width: 0,
+                          background: `linear-gradient(90deg, ${skill.color}99, ${skill.color})`,
+                          transition: `width 1.2s cubic-bezier(0.16,1,0.3,1) ${i * 120}ms`,
+                          "--target-width": `${skill.pct}%`,
+                        } as React.CSSProperties}
+                        data-target-width={`${skill.pct}%`}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div style={{ borderTop: `1px solid ${BORDER}` }} />
+
+              {/* Qualitative skills as pill clusters */}
+              <div className="flex flex-col gap-6 reveal-hidden" style={{ transitionDelay: "0.25s" }}>
+                <div>
+                  <p className="text-xs uppercase tracking-widest font-medium mb-3" style={{ color: MUTED }}>Statistical &amp; Analytical Methods</p>
+                  <div className="flex flex-wrap gap-2">
+                    {["SWOT Analysis", "PESTLE Analysis", "GAP Analysis", "Root Cause Analysis", "RFM Segmentation", "Balanced Scorecard"].map((s) => (
+                      <span key={s} className="text-sm px-4 py-2 border rounded-full transition-colors hover:text-white hover:border-white/30"
+                        style={{ borderColor: BORDER, color: "#888", background: "rgba(255,255,255,0.03)" }}>
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest font-medium mb-3" style={{ color: MUTED }}>Business &amp; Product</p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Agile / Scrum", "Market Research", "Business Strategy", "BRD Writing", "FRD Writing", "Stakeholder Management", "Process Mapping", "Sprint Facilitation"].map((s) => (
+                      <span key={s} className="text-sm px-4 py-2 border rounded-full transition-colors hover:text-white hover:border-white/30"
+                        style={{ borderColor: BORDER, color: "#888", background: "rgba(255,255,255,0.03)" }}>
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
