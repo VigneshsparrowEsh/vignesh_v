@@ -11,6 +11,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroCanvas from "@/components/HeroCanvas";
 import CustomCursor from "@/components/CustomCursor";
+import { useLocation } from "wouter";
 
 const AMBER   = "#F5A623";
 const BG      = "#0A0A0A";
@@ -118,6 +119,29 @@ function ContactForm() {
 export default function Home() {
   const [scrolled,       setScrolled]       = useState(false);
   const [activeSection,  setActiveSection]  = useState("home");
+  const [, setLocation] = useLocation();
+
+  const handleCardClick = (path: string, e: React.MouseEvent) => {
+    if (
+      (e.target as HTMLElement).closest("a") || 
+      (e.target as HTMLElement).closest("button")
+    ) {
+      return;
+    }
+    setLocation(path);
+  };
+
+  /* Hash scroll on load */
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const id = hash.replace("#", "");
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+  }, []);
 
   /* Nav scroll */
   useEffect(() => {
@@ -696,8 +720,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[300px]">
 
             {/* ── SkillYou — left top, tall 2 rows ── */}
-            <div className="bento-card reveal-hidden md:row-span-2 flex flex-col p-7"
-              style={{ background: "#0E0A1E", border: "1px solid rgba(139,92,246,0.18)" }}>
+            <div className="bento-card reveal-hidden md:row-span-2 flex flex-col p-7 cursor-pointer"
+              style={{ background: "#0E0A1E", border: "1px solid rgba(139,92,246,0.18)" }}
+              onClick={(e) => handleCardClick("/skillyou", e)}>
               <div className="flex items-center justify-between mb-5">
                 <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
                   style={{ background: "rgba(139,92,246,0.18)", color: "#a78bfa" }}>AI Career Platform</span>
@@ -723,8 +748,9 @@ export default function Home() {
             </div>
 
             {/* ── proof_of_Build — center top ── */}
-            <div className="bento-card reveal-hidden flex flex-col p-7"
-              style={{ background: "#061614", border: "1px solid rgba(20,184,166,0.18)", transitionDelay: "0.08s" }}>
+            <div className="bento-card reveal-hidden flex flex-col p-7 cursor-pointer"
+              style={{ background: "#061614", border: "1px solid rgba(20,184,166,0.18)", transitionDelay: "0.08s" }}
+              onClick={(e) => handleCardClick("/proofbuild", e)}>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
                   style={{ background: "rgba(20,184,166,0.15)", color: "#2dd4bf" }}>Live Product</span>
@@ -769,8 +795,9 @@ export default function Home() {
             </div>
 
             {/* ── CryptoNice — center bottom ── */}
-            <div className="bento-card reveal-hidden flex flex-col p-7"
-              style={{ background: "#0A0818", border: "1px solid rgba(99,102,241,0.18)", transitionDelay: "0.2s" }}>
+            <div className="bento-card reveal-hidden flex flex-col p-7 cursor-pointer"
+              style={{ background: "#0A0818", border: "1px solid rgba(99,102,241,0.18)", transitionDelay: "0.2s" }}
+              onClick={(e) => handleCardClick("/cryptonice", e)}>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
                   style={{ background: "rgba(99,102,241,0.15)", color: "#818cf8" }}>Web3 Platform</span>
@@ -831,7 +858,9 @@ export default function Home() {
 
           <div className="gsap-cases-grid">
             <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-px mb-px" style={{ background: BORDER }}>
-              <div className="p-10 md:p-14 case-card gsap-case-card flex flex-col justify-between min-h-[380px]" style={{ background: "#0D0D0D" }}>
+              <div className="p-10 md:p-14 case-card gsap-case-card flex flex-col justify-between min-h-[380px] cursor-pointer"
+                style={{ background: "#0D0D0D" }}
+                onClick={(e) => handleCardClick("/skillyou", e)}>
                 <div className="inline-block text-xs font-bold tracking-widest mb-10 px-3 py-1.5 border w-fit" style={{ borderColor: `${AMBER}30`, color: AMBER }}>
                   🚀 AI Product
                 </div>
