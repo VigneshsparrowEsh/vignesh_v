@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "wouter";
 import { motion } from "framer-motion";
 import {
   Mail, Github, Linkedin, Phone,
@@ -696,14 +697,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[300px]">
 
             {/* ── SkillYou — left top, tall 2 rows ── */}
-            <div className="bento-card reveal-hidden md:row-span-2 flex flex-col p-7"
-              style={{ background: "#0E0A1E", border: "1px solid rgba(139,92,246,0.18)" }}>
+            <Link href="/skillyou" className="bento-card reveal-hidden md:row-span-2 flex flex-col p-7 group"
+              style={{ background: "#0E0A1E", border: "1px solid rgba(139,92,246,0.18)" }} aria-label="Open SkillYou startup case study">
               <div className="flex items-center justify-between mb-5">
                 <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full"
                   style={{ background: "rgba(139,92,246,0.18)", color: "#a78bfa" }}>AI Career Platform</span>
-                <a href="https://skillyou.in" target="_blank" rel="noreferrer"
-                  className="text-xs font-semibold px-3 py-1.5 rounded-full transition-colors"
-                  style={{ background: "rgba(139,92,246,0.12)", color: "#a78bfa" }}>skillyou.in ↗</a>
+                <span
+                  className="text-xs font-semibold px-3 py-1.5 rounded-full transition-colors group-hover:bg-[#a78bfa] group-hover:text-black"
+                  style={{ background: "rgba(139,92,246,0.12)", color: "#a78bfa" }}>View case study →</span>
               </div>
               <h3 className="font-display font-semibold text-3xl text-white mb-2 leading-tight">SkillYou</h3>
               <p className="text-sm leading-relaxed mb-6" style={{ color: "#9980c8" }}>AI-powered career platform — personalised job recs, skill-gap analysis &amp; interview prep. Built end-to-end and live.</p>
@@ -720,7 +721,7 @@ export default function Home() {
                 <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bento-orbit-r"
                   style={{ background: AMBER, opacity: 0.7 }} />
               </div>
-            </div>
+            </Link>
 
             {/* ── proof_of_Build — center top ── */}
             <div className="bento-card reveal-hidden flex flex-col p-7"
@@ -831,15 +832,16 @@ export default function Home() {
 
           <div className="gsap-cases-grid">
             <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-px mb-px" style={{ background: BORDER }}>
-              <div className="p-10 md:p-14 case-card gsap-case-card flex flex-col justify-between min-h-[380px]" style={{ background: "#0D0D0D" }}>
+              <Link href="/skillyou" className="p-10 md:p-14 case-card gsap-case-card flex flex-col justify-between min-h-[380px] group" style={{ background: "#0D0D0D" }} aria-label="Open SkillYou startup case study">
                 <div className="inline-block text-xs font-bold tracking-widest mb-10 px-3 py-1.5 border w-fit" style={{ borderColor: `${AMBER}30`, color: AMBER }}>
                   🚀 AI Product
                 </div>
                 <div>
                   <h3 className="font-display font-medium text-3xl md:text-4xl text-white leading-tight mb-5">SkillYou — AI-Powered Career Platform for the Disrupted Job Market</h3>
-                  <p className="text-base leading-relaxed" style={{ color: "#666" }}>End-to-end AI job platform combining job discovery, resume intelligence, and career pivot guidance. 5-layer intelligent job agent powered by Claude API, Supabase & PostgreSQL.</p>
+                  <p className="text-base leading-relaxed" style={{ color: "#666" }}>End-to-end AI career growth platform combining product strategy, market research, AI career guidance, skill-gap analysis, and startup execution.</p>
+                  <span className="inline-flex items-center mt-6 text-xs uppercase tracking-widest font-bold transition-colors group-hover:text-[#F5A623]" style={{ color: "#777" }}>Read startup case study →</span>
                 </div>
-              </div>
+              </Link>
 
               <div className="flex flex-col gap-px" style={{ background: BORDER }}>
                 <div className="p-8 case-card gsap-case-card flex-1" style={{ background: "#0D0D0D" }}>
